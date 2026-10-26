@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Crusader Charters Concept</title>
+</head>
+<body>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&family=Lato:wght@400&family=Lusitana&family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: chart-led. The boat and the grounds she fishes are the story; sand-gold bands are kept from the live site, hull navy is the new anchor. */
+:root{
+  --sand:#DDCD84;      /* kept: their header gold (#ddcd84 theme-color) */
+  --brass:#7F764C;     /* kept: their olive-gold accent */
+  --hull:#13203F;      /* new: Crusader's navy hull */
+  --sea:#2C5A7A;       /* chart water line */
+  --bg:#FFFFFF;
+  --surface:#F3F1E7;
+  --ink:#13203F;
+  --ink-2:#4B5468;
+  --line:#D9D6C8;
+  --on-dark:#F4F2EA;
+  --chart-water:#E4ECF0;
+  --chart-land:#E9DFB4;
+  --chart-ink:#2B3B5A;
+  --display:"Yeseva One",Georgia,serif;
+  --body:"Libre Franklin",system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bb:"Space Grotesk",system-ui,sans-serif;
+  --bb-ink:#0A0A0C;--bb-blue:#2A47ED;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1527;--surface:#13203F;--ink:#EEF0F2;--ink-2:#AAB3C4;--line:#26365A;--brass:#C9BB7A;
+  --chart-water:#102038;--chart-land:#3A3A2C;--chart-ink:#C9D4E4;--sea:#7FA7C4;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1527;--surface:#13203F;--ink:#EEF0F2;--ink-2:#AAB3C4;--line:#26365A;--brass:#C9BB7A;
+  --chart-water:#102038;--chart-land:#3A3A2C;--chart-ink:#C9D4E4;--sea:#7FA7C4;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 12px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--sand);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- concept tag ---------- */
+.bb-tag{position:fixed;z-index:50;left:calc(14px + env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;background:var(--bb-ink);color:#fff;font:500 12px/1 var(--bb);letter-spacing:.02em;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.bb-tag i{width:8px;height:8px;border-radius:50%;background:var(--bb-blue)}
+.bb-tag:hover{background:#16161c}
+
+/* ---------- top strip + nav ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--hull)}
+.strip{background:var(--sand);color:#13203F;font:500 13px/1.3 var(--body)}
+.strip .wrap{display:flex;gap:10px 18px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:9px;text-align:center}
+.strip b{font-weight:700}
+.strip a{font-weight:600}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--hull);color:var(--on-dark)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;padding-block:14px}
+.mark{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.mark b{font:400 22px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--sand)}
+.mark span{font:500 10px/1 var(--body);letter-spacing:.32em;text-transform:uppercase;opacity:.75;margin-top:5px}
+.links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.links a{text-decoration:none;font:500 14px/1 var(--body);padding:10px 12px;border-radius:6px;opacity:.85}
+.links a:hover,.links a[aria-current="page"]{opacity:1;background:rgba(255,255,255,.08)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--body);text-decoration:none;padding:14px 20px;border-radius:6px;border:1.5px solid transparent;cursor:pointer}
+.btn-sand{background:var(--sand);color:#13203F}
+.btn-sand:hover{background:#e6d998}
+.btn-ghost{border-color:currentColor;color:inherit;background:transparent}
+.nav-cta{padding:11px 16px;font-size:14px}
+@media (max-width:860px){.links{display:none}.nav-cta{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;color:#fff;background:#0b1428;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 45%;opacity:.85}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,20,40,.92) 0%,rgba(11,20,40,.55) 45%,rgba(11,20,40,.05) 80%)}
+.hero .wrap{position:relative;z-index:1;padding-block:clamp(72px,11vw,150px) clamp(56px,8vw,110px)}
+.hero h1{font-size:clamp(40px,6.4vw,84px);max-width:11ch;color:#fff}
+.hero h1 em{font-style:normal;color:var(--sand)}
+.hero p.lede{max-width:46ch;margin-top:22px;font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.88)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.creds{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:42px;font:500 13px/1.3 var(--body);color:rgba(255,255,255,.8)}
+.creds span{display:flex;align-items:center;gap:8px}
+.creds span::before{content:"";width:6px;height:6px;background:var(--sand);transform:rotate(45deg)}
+
+/* ---------- sections ---------- */
+section{padding-block:clamp(64px,8vw,110px)}
+.sec-head{display:grid;gap:14px;max-width:62ch;margin-bottom:40px}
+.sec-head h2{font-size:clamp(32px,4vw,52px)}
+.sec-head p{color:var(--ink-2);font-size:17px}
+.alt{background:var(--surface)}
+
+/* trip finder */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{font:600 14px/1 var(--body);padding:11px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.trips{display:grid;grid-template-columns:1fr;gap:22px}
+@media (min-width:640px){.trips{grid-template-columns:repeat(2,minmax(0,1fr))}.trip.feat{grid-column:span 2}.trip.feat figure{aspect-ratio:16/9}}
+@media (min-width:1040px){.trips{grid-template-columns:repeat(4,minmax(0,1fr))}.trip.feat figure{aspect-ratio:auto;height:100%;max-height:none}.trip.feat{flex-direction:row}.trip.feat figure{flex:1.2;min-height:340px}.trip.feat .tb{flex:1}}
+.trip{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none}
+.trip figure{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--surface)}
+.trip figure img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.trip:hover figure img{transform:scale(1.04)}
+.trip .tb{display:flex;flex-direction:column;gap:10px;padding:20px 20px 22px;flex:1}
+.trip .kind{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.trip h3{font-size:25px}
+.trip p{color:var(--ink-2);font-size:15px}
+.specs{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font:500 13px/1.4 var(--mono);color:var(--ink)}
+.specs b{font-weight:500;color:var(--brass)}
+
+/* chart */
+.chart-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:start}
+@media (max-width:900px){.chart-grid{grid-template-columns:1fr}}
+.chart{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--chart-water)}
+.chart svg{display:block;width:100%;height:auto}
+.chart figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line);background:var(--bg);font:400 12px/1.4 var(--mono);color:var(--ink-2)}
+.marks{display:grid;gap:0}
+.markrow{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);cursor:default}
+.markrow:first-child{border-top:1px solid var(--line)}
+.markrow .n{font:500 13px/1 var(--mono);color:var(--brass)}
+.markrow h3{font:600 17px/1.3 var(--body)}
+.markrow p{color:var(--ink-2);font-size:14px;margin-top:4px}
+.markrow .d{font:500 14px/1 var(--mono)}
+.markrow.on h3{color:var(--sea)}
+
+/* season strip */
+.season{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.season table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+.season th,.season td{padding:12px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.season th{font:500 12px/1 var(--mono);color:var(--ink-2)}
+.season td:first-child,.season th:first-child{text-align:left;padding-left:16px;font:600 14px/1.3 var(--body);color:var(--ink);white-space:nowrap}
+.season tr:last-child td{border-bottom:0}
+.season td.on span{display:block;height:12px;border-radius:3px;background:var(--sand)}
+.season td.half span{display:block;height:12px;border-radius:3px;background:linear-gradient(90deg,transparent 50%,var(--sand) 50%)}
+.note{margin-top:12px;font-size:13px;color:var(--ink-2)}
+
+/* boat */
+.boat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,70px);align-items:center}
+@media (max-width:860px){.boat{grid-template-columns:1fr}}
+.boat img{border-radius:10px;width:100%;aspect-ratio:1/1;object-fit:cover}
+.spec-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin-top:28px;border-top:1px solid var(--line)}
+.spec-list div{padding:14px 0;border-bottom:1px solid var(--line)}
+.spec-list dt{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.spec-list dd{margin:6px 0 0;font-size:15px}
+.boat .copy{display:grid;gap:16px}
+.boat .copy p{color:var(--ink-2)}
+
+/* record (dark band) */
+.record{background:var(--hull);color:var(--on-dark)}
+.record .eyebrow{color:var(--sand)}
+.record .sec-head p{color:rgba(244,242,234,.75)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--hull);padding:26px 22px}
+.stat b{display:block;font:400 clamp(36px,4.4vw,56px)/1 var(--display);color:var(--sand)}
+.stat span{display:block;margin-top:10px;font-size:14px;color:rgba(244,242,234,.78)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.tags span{font:500 13px/1 var(--mono);padding:9px 12px;border:1px solid rgba(255,255,255,.22);border-radius:4px}
+
+/* sailings */
+.sail{display:grid;gap:12px}
+.sailing{display:grid;grid-template-columns:110px minmax(0,1fr) auto auto;gap:18px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.sailing .date{font:400 30px/1 var(--display)}
+.sailing .date small{display:block;font:500 12px/1 var(--mono);color:var(--ink-2);margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
+.sailing h3{font:600 17px/1.3 var(--body)}
+.sailing p{font-size:14px;color:var(--ink-2)}
+.left{font:600 13px/1 var(--body);padding:8px 12px;border-radius:999px;background:var(--sand);color:#13203F;white-space:nowrap}
+@media (max-width:700px){.sailing{grid-template-columns:auto minmax(0,1fr)}.sailing .left{justify-self:start}.sailing .btn{grid-column:1/-1;justify-content:center}}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:160px;gap:8px}
+.gal img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.gal .w2{grid-column:span 2}.gal .h2{grid-row:span 2}
+@media (max-width:760px){.gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}.gal .w2{grid-column:span 2}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.ways{display:grid;gap:14px;margin-top:26px}
+.way{display:flex;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.way span:first-child{color:var(--ink-2);font-size:14px}
+.way span:last-child{font:500 15px/1.4 var(--mono);user-select:all}
+form{display:grid;gap:14px;background:var(--surface);padding:clamp(20px,3vw,32px);border-radius:10px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font:600 13px/1 var(--body)}
+input,select,textarea{font:400 15px/1.4 var(--body);padding:12px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+.ok{display:none;padding:14px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:14px}
+.ok.show{display:block}
+
+footer{background:var(--hull);color:rgba(244,242,234,.8);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;padding-block:40px 80px}
+footer .mark b{font-size:20px}
+
+/* ---------- inner page hero ---------- */
+.phero{position:relative;color:#fff;background:#0b1428;overflow:hidden}
+.phero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.phero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,20,40,.9),rgba(11,20,40,.25))}
+.phero .wrap{position:relative;z-index:1;padding-block:clamp(90px,12vw,170px) clamp(40px,5vw,64px)}
+.phero h1{font-size:clamp(40px,6vw,78px);max-width:14ch}
+.phero p{max-width:52ch;margin-top:16px;color:rgba(255,255,255,.88);font-size:18px}
+.crumb{font:500 13px/1 var(--mono);color:var(--sand);margin-bottom:16px;display:block;text-decoration:none}
+.two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.prose{display:grid;gap:18px;max-width:64ch}
+.prose p{color:var(--ink-2);font-size:17px}
+.prose h2{font-size:clamp(28px,3.4vw,40px);margin-top:10px}
+.pricebox{position:sticky;top:96px;border:1px solid var(--line);border-radius:10px;padding:26px;background:var(--bg);display:grid;gap:16px}
+.pricebox .big{font:400 46px/1 var(--display)}
+.pricebox .big small{font:500 14px/1 var(--body);color:var(--ink-2);margin-left:6px}
+.pricebox ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px}
+.pricebox li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.pricebox li span:last-child{font-family:var(--mono)}
+.day{list-style:none;padding:0;margin:0;display:grid;gap:0;counter-reset:d}
+.day li{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line)}
+.day li b{font:500 14px/1.5 var(--mono);color:var(--brass)}
+.day li strong{display:block;font-weight:600}
+.day li span{color:var(--ink-2);font-size:15px}
+
+/* trips table page */
+.ptable{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.ptable table{width:100%;min-width:760px;border-collapse:collapse;font-size:15px}
+.ptable th{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brass);text-align:left;padding:16px;border-bottom:1px solid var(--line);background:var(--surface)}
+.ptable td{padding:18px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.ptable td.n{font-family:var(--mono);white-space:nowrap}
+.ptable tr:last-child td{border-bottom:0}
+.ptable td strong{display:block;font-weight:600}
+.ptable td small{color:var(--ink-2)}
+.faq{display:grid;gap:0;max-width:820px}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--brass)}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:10px;color:var(--ink-2)}
+
+/* ---------- BrandBildr brand pack view ---------- */
+.bp{background:#FFFFFF;color:#0A0A0C;font-family:var(--body)}
+.bp-band{background:var(--bb-ink);color:#fff}
+.bp-band .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:30px}
+.bp-band .wm{font:600 24px/1 var(--bb);letter-spacing:-.02em}
+.bp-band .ref{font:500 12px/1.5 var(--bb);letter-spacing:.04em;text-transform:uppercase;text-align:right;color:#B9B9C1}
+.bp h2{font:600 clamp(26px,3vw,36px)/1.1 var(--bb);letter-spacing:-.02em;margin-bottom:8px}
+.bp .lab{font:500 11px/1 var(--bb);letter-spacing:.06em;text-transform:uppercase;color:#6E6E76;margin-bottom:14px;display:block}
+.bp section{padding-block:56px;border-bottom:1px solid #E2E2E6}
+.bp .intro{max-width:70ch;color:#3a3a42;font-size:17px}
+.bp a.back{display:inline-flex;margin-top:16px;font:500 14px/1 var(--bb);color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:10px 14px;border-radius:6px}
+.logo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.logo-box div{padding:36px 24px;border-radius:8px;display:grid;place-items:center;min-height:150px;text-align:center}
+.logo-box .wm1{background:#DDCD84;font:400 clamp(22px,2.6vw,30px)/1 var(--display);text-transform:uppercase;color:#000}
+.logo-box .wm2{background:#13203F;color:#DDCD84}
+.logo-box .wm2 b{font:400 clamp(22px,2.6vw,30px)/1 var(--display);letter-spacing:.06em;text-transform:uppercase;display:block}
+.logo-box .wm2 span{font:500 10px/1 var(--body);letter-spacing:.32em;text-transform:uppercase;color:#F4F2EA;display:block;margin-top:8px}
+.cap{font-size:13px;color:#6E6E76;margin-top:10px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sw div{border:1px solid #E2E2E6;border-radius:8px;overflow:hidden;font-size:13px}
+.sw i{display:block;height:84px}
+.sw p{padding:10px 12px;line-height:1.45}
+.sw p b{display:block;font:600 13px/1.3 var(--bb)}
+.sw p code{font-family:var(--mono);font-size:12px}
+.sw .new{outline:2px solid var(--bb-blue);outline-offset:-2px}
+.typerow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.typerow div{border:1px solid #E2E2E6;border-radius:8px;padding:22px}
+.typerow .s{font-size:40px;line-height:1.1;margin-bottom:10px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.photos img{aspect-ratio:1;object-fit:cover;border-radius:6px;width:100%}
+.quotes{display:grid;gap:12px}
+.quotes blockquote{margin:0;padding:16px 18px;border-left:3px solid #DDCD84;background:#F5F5F6;font-size:15px;color:#25252b}
+.quotes blockquote cite{display:block;font:500 11px/1 var(--bb);letter-spacing:.06em;text-transform:uppercase;color:#6E6E76;font-style:normal;margin-top:8px}
+.wk{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.wk{grid-template-columns:1fr}}
+.wk div{border:1px solid #E2E2E6;border-radius:8px;padding:22px}
+.wk h3{font:600 17px/1.2 var(--bb);margin-bottom:12px}
+.wk ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px;color:#25252b}
+.dir{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.dir{grid-template-columns:1fr}}
+.dir div{border-top:3px solid #0A0A0C;padding-top:16px}
+.dir h3{font:600 18px/1.2 var(--bb);margin-bottom:10px}
+.dir ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px;color:#25252b}
+.show{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:s}
+@media (max-width:860px){.show{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.show{grid-template-columns:1fr}}
+.show div{background:#F5F5F6;border-radius:8px;padding:20px}
+.show b{display:block;font:600 16px/1.25 var(--bb);margin-bottom:8px}
+.show p{font-size:14px;color:#3a3a42}
+.view[hidden]{display:none!important}
+
+/* ===== BrandBildr concept front end (BrandBildr Signature mode) ===== */
+.concept-bar{background:#0A0A0C;color:#EFECE4;font:500 12px/1.4 var(--bb);letter-spacing:.02em}
+.concept-bar .wrap{display:flex;gap:6px 18px;flex-wrap:wrap;justify-content:space-between;padding-block:8px}
+.concept-bar b{font-weight:600;color:#fff}.concept-bar .dimmed{color:#8A8A92}
+.cover{position:fixed;inset:0;z-index:200;background:#0A0A0C;color:#EFECE4;overflow-y:auto;font-family:"Inter",var(--body)}
+.cover[hidden]{display:none!important}
+.cover canvas{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.cover .cv{position:relative;z-index:1;min-height:100%;display:grid;grid-template-rows:auto 1fr auto;max-width:1200px;margin:0 auto;padding-top:calc(24px + env(safe-area-inset-top,0px));padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cv-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.cv-top img{height:26px;width:auto}
+.cv-label{font:500 11px/1.2 var(--bb);text-transform:uppercase;color:#8A8A92;letter-spacing:.08em}
+.cv-main{display:grid;gap:28px;align-content:center;padding-block:48px;max-width:860px}
+.cv-main h1{font-family:var(--bb);font-weight:600;letter-spacing:-.03em;font-size:clamp(40px,7vw,88px);line-height:.98;color:#EFECE4}
+.cv-main h1 em{font-style:normal;color:#2A47ED}
+.cv-lede{font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:#B9B7B0;max-width:58ch}
+.cv-inside{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#1E1E24;border:1px solid #1E1E24;max-width:860px}
+.cv-inside div{background:#0E0E12;padding:18px;display:grid;gap:8px;align-content:start}
+.cv-inside b{font:600 17px/1.25 var(--bb);color:#EFECE4;letter-spacing:-.01em}
+.cv-inside span{font-size:14px;color:#8A8A92;line-height:1.5}
+.cv-actions{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.cv-btn{display:inline-flex;align-items:center;gap:12px;background:#2A47ED;color:#fff;border:0;border-radius:0;font:600 16px/1 var(--bb);padding:18px 24px;cursor:pointer;transition:background .25s}
+.cv-btn:hover{background:#3B57FF}
+.cv-btn svg{transition:transform .25s}
+.cv-btn:hover svg{transform:translateX(4px)}
+.cv-link{font:500 14px/1 var(--bb);color:#EFECE4;text-decoration:none;border-bottom:1px solid #3a3a44;padding-bottom:4px}
+.cv-link:hover{border-color:#2A47ED}
+.cv-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;border-top:1px solid #1E1E24;padding-top:18px;font-size:13px;color:#8A8A92}
+.cv-foot .sel{color:#EFECE4}
+@media (max-width:700px){
+  .cover .cv{padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .cv-top img{height:22px}.cv-top .cv-label{display:none}
+  .cv-main{gap:18px;padding-block:24px}
+  .cv-main h1{font-size:clamp(32px,9.6vw,44px)}
+  .cv-lede{font-size:16px;line-height:1.5}
+  .cv-inside{grid-template-columns:1fr}
+  .cv-inside div{grid-template-columns:92px minmax(0,1fr);align-items:baseline;gap:8px;padding:11px 14px}
+  .cv-inside span:last-child{display:none}
+  .cv-inside b{font-size:15px}
+  .cv-actions{flex-direction:column;align-items:stretch}
+  .cv-btn{justify-content:center;padding:17px 20px}.cv-link{align-self:center}
+  .cv-foot{font-size:12px;padding-top:12px}
+}
+body.covered{overflow:hidden}
+body.covered .bb-tag{display:none}
+.bb-tag{cursor:pointer;border:0}
+</style>
+
+<section class="cover" id="cover" aria-label="Concept introduction by BrandBildr" hidden>
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="cv">
+    <div class="cv-top"><img src="img/bb-lockup.svg" alt="BrandBildr"><span class="cv-label">Website concept · October 2026</span></div>
+    <div class="cv-main">
+      <span class="cv-label">Prepared for Crusader Charters, Sutton Harbour</span>
+      <h1>Giant bluefin on Plymouth's doorstep. <em>A website to match.</em></h1>
+      <p class="cv-lede">A concept for a new crusader-marine.co.uk, built from your own photos, prices and words. Nothing here is live.</p>
+      <div class="cv-inside">
+        <div><span class="cv-label">Home</span><b>Trip finder &amp; the grounds</b><span>Filter every trip, then see the marks you fish on an illustrated chart.</span></div>
+        <div><span class="cv-label">Bluefin tuna</span><b>A page of its own</b><span>The 935 lb tagging record, how the day runs, and dates on request.</span></div>
+        <div><span class="cv-label">Trips &amp; prices</span><b>Book a seat</b><span>Every trip in one table, shared sailings with spaces left.</span></div>
+      </div>
+      <div class="cv-actions">
+        <button class="cv-btn" type="button" id="enterBtn">View the concept <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <a class="cv-link" href="#brandpack" id="packLink">Read the brand pack</a>
+      </div>
+    </div>
+    <div class="cv-foot"><span>George, BrandBildr · <span class="sel">George@BrandBildr.com</span></span><span>instagram.com/brand.bildr</span></div>
+  </div>
+</section>
+
+<button class="bb-tag" type="button" id="bbTag" aria-label="About this concept"><i></i>Concept by BrandBildr</button>
+
+<!-- ================= SHARED CHROME ================= -->
+<div id="chrome">
+  <div class="concept-bar"><div class="wrap"><span><b>Website concept</b> <span class="dimmed">· A proposal for Crusader Charters, not the live site. Real content and photos from crusader-marine.co.uk.</span></span><span>Concept by BrandBildr</span></div></div>
+  <div class="strip"><div class="wrap">
+    <span><b>Next sailing:</b> Fri 13 Nov, evening rays from the Barbican</span>
+    <span>2 spaces left</span>
+    <a href="#home" data-go="sailings">See sailings</a>
+  </div></div>
+  <nav class="top" aria-label="Main"><div class="wrap">
+    <a class="mark" href="#home"><b>Crusader</b><span>Charters · Plymouth</span></a>
+    <div class="links">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#trips" data-nav="trips">Trips &amp; prices</a>
+      <a href="#tuna" data-nav="tuna">Bluefin tuna</a>
+      <a href="#home" data-go="grounds">The grounds</a>
+      <a href="#home" data-go="contact">Contact</a>
+    </div>
+    <a class="btn btn-sand nav-cta" href="#home" data-go="contact">Book a seat</a>
+  </div></nav>
+</div>
+
+<!-- ================= HOME ================= -->
+<main class="view" id="v-home">
+  <header class="hero">
+    <img src="img/crusader.jpg" alt="Crusader, a 38-foot Evolution charter boat, running at speed off Plymouth">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--sand)">Sutton Harbour, Plymouth · since 2007</p>
+      <h1 style="margin-top:18px">Plymouth's <em>big game</em> charter boat.</h1>
+      <p class="lede">Bluefin tuna, sharks, Channel wrecks and wildlife days aboard Crusader, a purpose-built 38' Evolution that's spacious, comfortable and fast. All kit included, full tuition given.</p>
+      <div class="ctas">
+        <a class="btn btn-sand" href="#home" data-go="finder">Find your trip</a>
+        <a class="btn btn-ghost" href="#tuna">Bluefin tuna days</a>
+      </div>
+      <div class="creds">
+        <span>WISE accredited</span><span>NOAA &amp; CHART tagging boat</span><span>100% catch &amp; release on sharks</span><span>Barbican &amp; Mount Batten pick-up</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="finder">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Choose your day</p>
+        <h2>What are you after?</h2>
+        <p>From a few hours inshore to ten hours chasing giants. Every trip includes rods, tackle and tuition, and anything kept for the pot is cleaned and iced on board.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter trips">
+        <button class="chip" id="f-all" aria-pressed="true" data-f="all">All trips</button>
+        <button class="chip" id="f-big" aria-pressed="false" data-f="big">Big game</button>
+        <button class="chip" id="f-fish" aria-pressed="false" data-f="fish">Sea fishing</button>
+        <button class="chip" id="f-wild" aria-pressed="false" data-f="wild">Wildlife &amp; swims</button>
+      </div>
+      <div class="trips" id="trips-grid">
+        <a class="trip feat" data-k="big" href="#tuna">
+          <figure><img src="img/dsc_2378.jpg" alt="Bluefin tuna boatside in white water"></figure>
+          <div class="tb"><span class="kind">Big game</span><h3>Bluefin tuna</h3><p>Ten hours offshore for giant Atlantic bluefin, fished from the custom fighting chair or stand-up. Tagged and released.</p>
+          <div class="specs"><span><b>£</b>1,100 boat</span><span><b>£</b>275 pp</span><span>10 hrs · 4 anglers</span></div></div>
+        </a>
+        <a class="trip" data-k="big" href="#trips">
+          <figure><img src="img/img_20210811_160455_109.jpg" alt="Thresher shark underwater"></figure>
+          <div class="tb"><span class="kind">Big game</span><h3>Shark fishing</h3><p>Blue sharks in numbers, with porbeagle and the odd acrobatic thresher. Every fish recorded and tagged.</p>
+          <div class="specs"><span><b>£</b>700 boat</span><span><b>£</b>175 pp</span><span>4–5 anglers</span></div></div>
+        </a>
+        <a class="trip" data-k="fish" href="#trips">
+          <figure><img src="img/_mg_7221.jpg" alt="Angler holding a large pollack on deck"></figure>
+          <div class="tb"><span class="kind">Sea fishing</span><h3>Reefs &amp; wartime wrecks</h3><p>Eddystone, the Rutts and Hands Deeps for pollack, coalfish, cod, bass, ling and conger. Our most popular day.</p>
+          <div class="specs"><span><b>£</b>700 boat</span><span><b>£</b>87.50 pp</span><span>8 anglers</span></div></div>
+        </a>
+        <a class="trip" data-k="fish" href="#trips">
+          <figure><img src="img/_mg_1529.jpg" alt="Smiling angler with a bass"></figure>
+          <div class="tb"><span class="kind">Sea fishing</span><h3>Channel wrecks, long range</h3><p>Unrivalled wreck sport deep in the English Channel, scheduled when weather and tides line up.</p>
+          <div class="specs"><span><b>£</b>800 boat</span><span>8–9 anglers</span><span>Weather dependent</span></div></div>
+        </a>
+        <a class="trip" data-k="fish" href="#trips">
+          <figure><img src="img/img_20210612_102638.jpg" alt="Angler holding a pollack against blue sky"></figure>
+          <div class="tb"><span class="kind">Sea fishing</span><h3>Banks &amp; evening rays</h3><p>Rays, tope, smoothhounds, spurdog and flatfish on the banks, including winter evening trips.</p>
+          <div class="specs"><span><b>£</b>700 boat</span><span><b>£</b>87.50 pp</span><span>8 anglers</span></div></div>
+        </a>
+        <a class="trip" data-k="wild" href="#trips">
+          <figure><img src="img/bandit-dolphin.jpg" alt="Common dolphin breaking the surface"></figure>
+          <div class="tb"><span class="kind">Wildlife</span><h3>Marine safari</h3><p>Four-hour tours at morning, afternoon or sunset, or an eight-hour ocean explorer day for whales and tuna.</p>
+          <div class="specs"><span>4 or 8 hrs</span><span>Families &amp; groups</span><span>Price on request</span></div></div>
+        </a>
+        <a class="trip" data-k="wild" href="#trips">
+          <figure><img src="img/blue-shark-underwater.jpg" alt="Blue shark underwater"></figure>
+          <div class="tb"><span class="kind">Swim</span><h3>Snorkel with blue sharks</h3><p>The original Plymouth shark swim. Guides and rescue swimmers in the water with you. Rated top 10% worldwide on TripAdvisor.</p>
+          <div class="specs"><span>Mid-June – Sept</span><span>Confident swimmers</span><span>Price on request</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="grounds">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The grounds</p>
+        <h2>Twelve miles to the Eddystone. Further for the giants.</h2>
+        <p>Crusader leaves Sutton Harbour and is on the marks fast. Hover a mark to see where it sits.</p>
+      </div>
+      <div class="chart-grid">
+        <figure class="chart" style="margin:0">
+          <svg viewBox="0 0 1000 700" role="img" aria-labelledby="chartTitle">
+            <title id="chartTitle">Illustrated chart of Plymouth Sound and the offshore fishing marks</title>
+            <defs>
+              <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="var(--chart-ink)" stroke-opacity=".08" stroke-width="1"/></pattern>
+            </defs>
+            <rect width="1000" height="700" fill="var(--chart-water)"/>
+            <rect width="1000" height="700" fill="url(#grid)"/>
+            <!-- depth contours -->
+            <g fill="none" stroke="var(--sea)" stroke-opacity=".35" stroke-width="1.2" stroke-dasharray="2 6">
+              <path d="M0 190 C180 210 330 250 470 280 C600 300 720 300 1000 330"/>
+              <path d="M0 330 C200 350 360 390 520 420 C680 440 820 440 1000 470"/>
+              <path d="M0 500 C220 520 400 560 560 590 C720 610 860 610 1000 630"/>
+            </g>
+            <g font-family="IBM Plex Mono,monospace" font-size="13" fill="var(--sea)" fill-opacity=".8">
+              <text x="40" y="215">20 m</text><text x="40" y="355">40 m</text><text x="40" y="525">60 m</text>
+            </g>
+            <!-- land -->
+            <path d="M0 0H600L610 30 585 70 555 120 520 177 490 196 456 204 400 170 300 130 150 102 0 82Z" fill="var(--chart-land)" stroke="var(--chart-ink)" stroke-width="1.5"/>
+            <path d="M650 0H1000V272L880 250 760 233 690 222 672 170 660 110 648 60 640 30Z" fill="var(--chart-land)" stroke="var(--chart-ink)" stroke-width="1.5"/>
+            <!-- breakwater -->
+            <path d="M572 134L618 128" stroke="var(--chart-ink)" stroke-width="5" stroke-linecap="round"/>
+            <g font-family="Libre Franklin,Arial,sans-serif" fill="var(--chart-ink)">
+              <text x="190" y="60" font-size="15" letter-spacing="3">CORNWALL</text>
+              <text x="790" y="120" font-size="15" letter-spacing="3">DEVON</text>
+              <text x="410" y="230" font-size="13">Rame Head</text>
+              <text x="626" y="150" font-size="12">Breakwater</text>
+              <text x="700" y="246" font-size="13">Wembury</text>
+              <text x="140" y="140" font-size="13" font-style="italic" fill-opacity=".7">Whitsand Bay</text>
+            </g>
+            <!-- home -->
+            <g>
+              <circle cx="636" cy="32" r="8" fill="var(--sand)" stroke="#13203F" stroke-width="2"/>
+              <text x="560" y="20" font-family="Libre Franklin,Arial,sans-serif" font-size="13" font-weight="700" fill="var(--chart-ink)" text-anchor="end">Barbican · Sutton Harbour</text>
+              <circle cx="648" cy="58" r="5" fill="var(--chart-ink)"/>
+              <text x="660" y="62" font-family="Libre Franklin,Arial,sans-serif" font-size="12" fill="var(--chart-ink)">Mount Batten</text>
+            </g>
+            <!-- courses -->
+            <g fill="none" stroke="#13203F" stroke-width="1.5" stroke-dasharray="7 6" id="courses" opacity=".8">
+              <path data-m="edd" d="M636 32 L596 132 L372 592"/>
+              <path data-m="hands" d="M636 32 L596 132 L242 420"/>
+              <path data-m="rutts" d="M636 32 L596 132 L740 512"/>
+              <path data-m="off" d="M636 32 L596 132 L560 690"/>
+            </g>
+            <!-- marks -->
+            <g font-family="Libre Franklin,Arial,sans-serif" font-size="15" font-weight="700" fill="var(--chart-ink)">
+              <g class="mk" data-m="edd"><circle cx="372" cy="594" r="11" fill="var(--sand)" stroke="#13203F" stroke-width="2"/><path d="M372 578v-14" stroke="#13203F" stroke-width="3"/><text x="392" y="600">Eddystone</text></g>
+              <g class="mk" data-m="hands"><circle cx="242" cy="420" r="11" fill="var(--sand)" stroke="#13203F" stroke-width="2"/><text x="262" y="426">Hands Deeps</text></g>
+              <g class="mk" data-m="rutts"><circle cx="740" cy="512" r="11" fill="var(--sand)" stroke="#13203F" stroke-width="2"/><text x="760" y="518">The Rutts</text></g>
+              <g class="mk" data-m="off"><path d="M548 664 L560 690 L572 664" fill="none" stroke="#13203F" stroke-width="2"/><text x="584" y="672">Offshore: tuna, sharks, Channel wrecks</text></g>
+            </g>
+            <!-- compass -->
+            <g transform="translate(900 600)" fill="none" stroke="var(--chart-ink)">
+              <circle r="44" stroke-opacity=".5"/><circle r="30" stroke-opacity=".3"/>
+              <path d="M0 -50 L7 0 L0 50 L-7 0Z" fill="var(--chart-ink)" fill-opacity=".85" stroke="none"/>
+              <path d="M-50 0 L0 6 L50 0 L0 -6Z" fill="var(--chart-ink)" fill-opacity=".35" stroke="none"/>
+              <text y="-56" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="var(--chart-ink)" stroke="none">N</text>
+            </g>
+          </svg>
+          <figcaption><span>Illustrative chart. Not for navigation.</span><span>Distances approx. from the Barbican</span></figcaption>
+        </figure>
+        <div class="marks" id="marks">
+          <div class="markrow" data-m="edd" tabindex="0"><span class="n">01</span><div><h3>Eddystone</h3><p>The famous reef and lighthouse. Pollack, coalfish, bream and bass.</p></div><span class="d">~12 nm</span></div>
+          <div class="markrow" data-m="hands" tabindex="0"><span class="n">02</span><div><h3>Hands Deeps</h3><p>Pinnacle reef west of the Eddystone. Big pollack and ling.</p></div><span class="d">~11 nm</span></div>
+          <div class="markrow" data-m="rutts" tabindex="0"><span class="n">03</span><div><h3>The Rutts</h3><p>Rough ground south of the Sound for cod, conger and spurdog.</p></div><span class="d">~10 nm</span></div>
+          <div class="markrow" data-m="off" tabindex="0"><span class="n">04</span><div><h3>Offshore &amp; the Channel</h3><p>Bluefin tuna, blue and porbeagle shark, and the long-range wartime wrecks.</p></div><span class="d">15 nm +</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">When to come</p>
+        <h2>The year on Crusader</h2>
+      </div>
+      <div class="season">
+        <table>
+          <thead><tr><th scope="col">Trip</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+          <tbody>
+            <tr><td>Reefs &amp; wrecks</td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td></tr>
+            <tr><td>Shark swims</td><td></td><td></td><td></td><td></td><td></td><td class="half"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td></td><td></td><td></td></tr>
+            <tr><td>Shark fishing</td><td></td><td></td><td></td><td></td><td></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td></td><td></td></tr>
+            <tr><td>Bluefin tuna</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td><td></td><td></td></tr>
+            <tr><td>Evening rays</td><td class="on"><span></span></td><td class="on"><span></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="on"><span></span></td><td class="on"><span></span></td><td class="on"><span></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Concept placeholder: season bars are indicative and would be set by the skipper.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap boat">
+      <img src="img/boat-aerial-crop.jpg" alt="Aerial view of Crusader with guests on deck beneath green cliffs">
+      <div class="copy">
+        <p class="eyebrow">The boat</p>
+        <h2 style="font-size:clamp(32px,4vw,52px)">Built for long days a long way out.</h2>
+        <p>Crusader is a purpose-built 38' Evolution, maintained to the highest standards. Inside and outside seating, a hot water boiler, microwave and a clean deck-entry toilet mean a ten-hour tuna day is as comfortable as a morning on the reef.</p>
+        <p>On board you'll find fully qualified skippers, crew, angling coaches, rescue swimmers and guides.</p>
+        <dl class="spec-list">
+          <div><dt>Vessel</dt><dd>38' Evolution</dd></div>
+          <div><dt>Chartering since</dt><dd>2007</dd></div>
+          <div><dt>Fish hold</dt><dd>Commercial-grade ice hold</dd></div>
+          <div><dt>Big game</dt><dd>Custom fighting chair</dd></div>
+          <div><dt>Pick-up</dt><dd>Barbican Events Pontoon</dd></div>
+          <div><dt>Or</dt><dd>Mount Batten Pontoon</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="record">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Fishing for the future</p>
+        <h2>Every tuna tagged. Every shark recorded.</h2>
+        <p>Crusader carries tags for NOAA and has fished every CHART season, helping science understand the return of bluefin to British water. Sharks are released, recorded for the Pat Smith database and tagged.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>935 lb</b><span>Largest bluefin tagged on Crusader</span></div>
+        <div class="stat"><b>110"</b><span>Length of that fish, nose to fork</span></div>
+        <div class="stat"><b>100s</b><span>Of tuna tagged across three CHART seasons</span></div>
+        <div class="stat"><b>100%</b><span>Catch and release on sharks</span></div>
+      </div>
+      <div class="tags"><span>NOAA tagging</span><span>CHART programme</span><span>Pat Smith shark database</span><span>WISE accredited</span></div>
+    </div>
+  </section>
+
+  <section id="sailings">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Join a shared trip</p>
+        <h2>Upcoming sailings</h2>
+        <p>Fishing on your own or as a pair? Take a seat on a shared trip.</p>
+      </div>
+      <div class="sail">
+        <div class="sailing"><div class="date">13<small>Fri · Nov</small></div><div><h3>Evening rays &amp; inshore species</h3><p>Barbican Landing Stage</p></div><span class="left">2 spaces left</span><a class="btn btn-ghost" href="#home" data-go="contact" data-trip="Evening rays, Fri 13 Nov">Request a seat</a></div>
+        <div class="sailing"><div class="date">20<small>Fri · Nov</small></div><div><h3>Evening rays &amp; inshore species</h3><p>Barbican Landing Stage</p></div><span class="left">3 spaces left</span><a class="btn btn-ghost" href="#home" data-go="contact" data-trip="Evening rays, Fri 20 Nov">Request a seat</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" style="padding-block:clamp(48px,6vw,80px)">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:28px"><p class="eyebrow">From the deck</p><h2>Recent days out</h2></div>
+      <div class="gal">
+        <img class="w2 h2" src="img/dsc_2385.jpg" alt="Bluefin tuna held boatside">
+        <img src="img/blob.jpg" alt="Angler with a cod">
+        <img src="img/_mg_7434.jpg" alt="Angler with a coalfish">
+        <img class="w2" src="img/dsc_7510.jpg" alt="Tuna at the surface">
+        <img src="img/img_20210404_124603.jpg" alt="Angler with pollack">
+        <img src="img/img_20210606_104601.jpg" alt="Angler with a ling">
+        <img class="w2" src="img/img-20210703-wa0002.jpg" alt="Angler with a large ling on deck" style="object-position:50% 30%">
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">Book</p>
+        <h2 style="font-size:clamp(32px,4vw,52px);margin-top:14px">Tell us your day. The skipper will come back to you.</h2>
+        <div class="ways">
+          <div class="way"><span>Call or WhatsApp</span><span>07975 875073</span></div>
+          <div class="way"><span>Or call</span><span>07841 678297</span></div>
+          <div class="way"><span>Calling hours</span><span>Every day, 09:00–17:00</span></div>
+          <div class="way"><span>Find us</span><span>Sutton Harbour, Plymouth</span></div>
+        </div>
+      </div>
+      <form id="book" novalidate>
+        <label for="b-trip">Trip
+          <select id="b-trip">
+            <option>Bluefin tuna (10 hrs)</option><option>Shark fishing</option><option>Reefs &amp; wartime wrecks</option><option>Channel wrecks, long range</option><option>Banks &amp; evening rays</option><option>Marine safari</option><option>Snorkel with blue sharks</option><option>Evening rays, Fri 13 Nov</option><option>Evening rays, Fri 20 Nov</option>
+          </select></label>
+        <div class="row2">
+          <label for="b-type">Booking
+            <select id="b-type"><option>Whole boat</option><option>Individual seats</option></select></label>
+          <label for="b-people">People
+            <input id="b-people" type="number" min="1" max="12" value="4"></label>
+        </div>
+        <div class="row2">
+          <label for="b-name">Name<input id="b-name" type="text" value="Sam Angler"></label>
+          <label for="b-date">Preferred date<input id="b-date" type="date" value="2027-08-21"></label>
+        </div>
+        <label for="b-msg">Anything else<textarea id="b-msg">First time on tuna, happy to fit around the weather.</textarea></label>
+        <button class="btn btn-sand" type="submit" style="justify-content:center">Send request</button>
+        <p class="ok" id="ok" role="status">Concept demo: in the live site this request goes straight to the skipper with your T&amp;Cs signed online, no PDF to print.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ================= TUNA ================= -->
+<main class="view" id="v-tuna" hidden>
+  <header class="phero">
+    <img src="img/dsc_2378.jpg" alt="Giant bluefin tuna at the surface beside Crusader">
+    <div class="wrap">
+      <a class="crumb" href="#home">← Crusader Charters</a>
+      <h1>Giant bluefin, twenty miles from Plymouth.</h1>
+      <p>Ten hours offshore with a crew that has tagged hundreds of Atlantic bluefin, up to 935 lb.</p>
+    </div>
+  </header>
+  <section>
+    <div class="wrap two">
+      <div class="prose">
+        <p class="eyebrow">Big game</p>
+        <h2>A fishery that's come home</h2>
+        <p>Crusader and her skippers and crew have been tagging and releasing giant Atlantic bluefin tuna every CHART season. Beyond leading this fishery out of Plymouth, the work feeds the management and stock recovery of an iconic species through careful handling and tagging. We hold tags for NOAA and will keep tagging these fish for research.</p>
+        <p>Fishing is from our custom-built fighting chair or stand-up, using lures and baits. We cater for every level of experience, with all kit free of charge and full tuition throughout.</p>
+        <h2>How the day runs</h2>
+        <ol class="day">
+          <li><b>Early</b><div><strong>Meet at the Barbican</strong><span>Board at the Events Pontoon or Mount Batten. Safety briefing and a run-through of the chair.</span></div></li>
+          <li><b>Run out</b><div><strong>Offshore to the fish</strong><span>Crusader is fast, so more of your ten hours is spent fishing.</span></div></li>
+          <li><b>Fish</b><div><strong>Lures and baits</strong><span>The crew read the birds, bait and water. You take the rod when it goes.</span></div></li>
+          <li><b>Hook-up</b><div><strong>Chair or stand-up</strong><span>Coached through the fight by the crew, however long it takes.</span></div></li>
+          <li><b>Release</b><div><strong>Measure, tag, release</strong><span>Every fish handled in the water and tagged for science. Photos boatside.</span></div></li>
+        </ol>
+      </div>
+      <aside class="pricebox" aria-label="Tuna trip price">
+        <p class="eyebrow">Bluefin tuna day</p>
+        <div class="big">£1,100<small>whole boat</small></div>
+        <ul>
+          <li><span>Individual seat</span><span>£275</span></li>
+          <li><span>Anglers</span><span>up to 4</span></li>
+          <li><span>Duration</span><span>10 hours</span></li>
+          <li><span>Kit &amp; tuition</span><span>included</span></li>
+        </ul>
+        <a class="btn btn-sand" href="#home" data-go="contact" data-trip="Bluefin tuna (10 hrs)" style="justify-content:center">Request tuna dates</a>
+        <p style="font-size:13px;color:var(--ink-2)">Catch and release only, under the CHART programme.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="record">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>935 lb</b><span>Biggest fish tagged</span></div>
+        <div class="stat"><b>110"</b><span>Its length</span></div>
+        <div class="stat"><b>3</b><span>CHART tagging seasons</span></div>
+        <div class="stat"><b>10 hrs</b><span>On the water</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="alt" style="padding-block:clamp(48px,6vw,80px)">
+    <div class="wrap"><div class="gal">
+      <img class="w2 h2" src="img/dsc_2385.jpg" alt="Tuna held at the side of the boat">
+      <img class="w2" src="img/dsc_7510.jpg" alt="Tuna at the surface on the leader">
+      <img class="w2" src="img/crusader.jpg" alt="Crusader at speed">
+      <img class="w2" src="img/_mg_7221.jpg" alt="Angler on Crusader">
+      <img class="w2" src="img/bandit-dolphin.jpg" alt="Dolphin offshore">
+    </div></div>
+  </section>
+</main>
+
+<!-- ================= TRIPS ================= -->
+<main class="view" id="v-trips" hidden>
+  <header class="phero">
+    <img src="img/_mg_1529.jpg" alt="Angler holding a bass aboard Crusader">
+    <div class="wrap">
+      <a class="crumb" href="#home">← Crusader Charters</a>
+      <h1>Trips &amp; prices</h1>
+      <p>Book the whole boat for your group, or take a seat on a shared trip. All rods, tackle and tuition included.</p>
+    </div>
+  </header>
+  <section>
+    <div class="wrap">
+      <div class="ptable">
+        <table>
+          <thead><tr><th>Trip</th><th>Targets</th><th>Whole boat</th><th>Per person</th><th>Group</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Bluefin tuna</strong><small>10 hours offshore</small></td><td>Giant Atlantic bluefin, tag &amp; release</td><td class="n">£1,100</td><td class="n">£275</td><td class="n">up to 4</td></tr>
+            <tr><td><strong>Shark fishing</strong><small>Catch &amp; release</small></td><td>Blue, porbeagle, thresher</td><td class="n">£700</td><td class="n">£175 (4) · £140 (5)</td><td class="n">4–5</td></tr>
+            <tr><td><strong>Reefs &amp; wartime wrecks</strong><small>Eddystone, Rutts, Hands Deeps</small></td><td>Pollack, coalfish, cod, bass, ling, conger, bream, spurdog</td><td class="n">£700</td><td class="n">£87.50</td><td class="n">8</td></tr>
+            <tr><td><strong>Channel wrecks</strong><small>Long range, weather permitting</small></td><td>Pollack, coalfish, cod, bass, ling, conger</td><td class="n">£800</td><td class="n">–</td><td class="n">8–9</td></tr>
+            <tr><td><strong>Banks</strong><small>Including evening trips</small></td><td>Rays, tope, smoothhounds, spurdog, flatfish</td><td class="n">£700</td><td class="n">£87.50</td><td class="n">8</td></tr>
+            <tr><td><strong>Marine safari</strong><small>4 hr or 8 hr ocean explorer</small></td><td>Seals, dolphins, seabirds, whales</td><td class="n">on request</td><td class="n">on request</td><td class="n">groups</td></tr>
+            <tr><td><strong>Snorkel with blue sharks</strong><small>Mid-June to September</small></td><td>Pelagic sharks, in the water</td><td class="n">on request</td><td class="n">on request</td><td class="n">confident swimmers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Before you book</p><h2>Good to know</h2></div>
+      <div class="faq">
+        <details open><summary>Where do we meet?</summary><p>Crusader picks up from the Barbican Events Pontoon and the Mount Batten Pontoon, both in Plymouth.</p></details>
+        <details><summary>Do I need my own kit?</summary><p>No. Full kit is provided at no extra cost on every trip, with tuition from the crew.</p></details>
+        <details><summary>Can I take fish home?</summary><p>On reef, wreck and banks trips, fish kept for the pot are dispatched, cleaned and stored in the on-deck ice hold. Sharks and tuna are always released.</p></details>
+        <details><summary>What's on board?</summary><p>Inside and outside seating, a hot water boiler, microwave and a clean deck-entry toilet.</p></details>
+        <details><summary>What happens if the weather turns?</summary><p>Long-range trips are only scheduled when the weather and tides allow. Concept placeholder: the live site would state the rebooking policy from the T&amp;Cs here.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="foot">
+  <div class="wrap">
+    <div><a class="mark" href="#home"><b>Crusader</b><span>Charters · Plymouth</span></a><p style="margin-top:14px">Crusader Charters Ltd · Sutton Harbour, Plymouth, Devon</p></div>
+    <div><p>07975 875073 · 07841 678297</p><p>Instagram @plymouthmarinesafari</p></div>
+  </div>
+</footer>
+
+<!-- ================= BRAND PACK (BrandBildr) ================= -->
+<main class="view bp" id="v-brandpack" hidden>
+  <div class="bp-band"><div class="wrap">
+    <div><span class="wm">BrandBildr</span><br><a class="back" href="#home">View the concept site →</a></div>
+    <div class="ref">Mini brand pack &amp; concept direction<br>Crusader Charters · BB-CC-01 · Oct 2026</div>
+  </div></div>
+
+  <section><div class="wrap">
+    <span class="lab">Overview</span>
+    <h2>Crusader Charters, as it stands today</h2>
+    <p class="intro">Taken from the live site at crusader-marine.co.uk (GoDaddy Website Builder). Colours and fonts are pulled from the site's own CSS, not judged by eye. Every photo in the concept is theirs.</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">01 · Logo</span>
+    <h2>A wordmark, no symbol</h2>
+    <p class="intro" style="margin-bottom:22px">There is no logo file. The brand is "Crusader Charters ltd" typed in Yeseva One, all caps, black on the gold header. The concept keeps that face and tidies the lock-up: CRUSADER as the hero word, "Charters · Plymouth" as a spaced sub-line, and drops "ltd" from public use.</p>
+    <div class="logo-box">
+      <div class="wm1">Crusader Charters ltd</div>
+      <div class="wm2"><div><b>Crusader</b><span>Charters · Plymouth</span></div></div>
+    </div>
+    <p class="cap">Left: current header. Right: concept lock-up.</p>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">02 · Colour</span>
+    <h2>From the site's code</h2>
+    <p class="intro" style="margin-bottom:22px">The gold is set as the site's theme colour. Everything else is greys from the template. Outlined swatch is the one addition, sampled from Crusader's own hull.</p>
+    <div class="sw">
+      <div><i style="background:#DDCD84"></i><p><b>Sand gold</b><code>#DDCD84</code><br>Header, theme colour</p></div>
+      <div><i style="background:#7F764C"></i><p><b>Olive brass</b><code>#7F764C</code><br>Accent text</p></div>
+      <div><i style="background:#A1955D"></i><p><b>Light brass</b><code>#A1955D</code><br>Hover / dividers</p></div>
+      <div><i style="background:#1B1B1B"></i><p><b>Ink</b><code>#1B1B1B</code><br>Headings</p></div>
+      <div><i style="background:#5E5E5E"></i><p><b>Body grey</b><code>#5E5E5E</code><br>Running text</p></div>
+      <div class="new"><i style="background:#13203F"></i><p><b>Hull navy (new)</b><code>#13203F</code><br>From the boat</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">03 · Type</span>
+    <h2>Three faces, used loosely</h2>
+    <div class="typerow" style="margin-top:18px">
+      <div><div class="s" style="font-family:var(--display)">Yeseva One</div><p>Logo only. Strong, maritime-classic. <b>Keep</b> and promote to all headlines.</p></div>
+      <div><div class="s" style="font-family:'Lato',var(--body);font-weight:400">Lato</div><p>Hero and section titles, often all caps at 22px. <b>Replace</b> with Libre Franklin for body and UI.</p></div>
+      <div><div class="s" style="font-family:Lusitana,Georgia,serif">Lusitana</div><p>Buttons and nav. Competes with Yeseva. <b>Drop</b>; add IBM Plex Mono for prices, distances and dates.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">04 · Photography</span>
+    <h2>Real, on-deck, and the best asset they have</h2>
+    <p class="intro" style="margin-bottom:22px">Proper catch shots on Crusader's deck, open blue water, tuna boatside in white water, and underwater shark shots. Unstaged and credible. On the live site it's mostly shown as 70px gallery thumbnails and repeated card images.</p>
+    <div class="photos">
+      <img src="img/crusader.jpg" alt=""><img src="img/dsc_2378.jpg" alt=""><img src="img/blue-shark-underwater.jpg" alt=""><img src="img/_mg_7221.jpg" alt=""><img src="img/bandit-dolphin.jpg" alt=""><img src="img/img_20210811_160455_109.jpg" alt="">
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">05 · Tone of voice</span>
+    <h2>Knowledgeable and proud, buried under SEO phrasing</h2>
+    <p class="intro" style="margin-bottom:22px">When the skipper's voice comes through it's confident, expert and conservation-minded. The problem is "Plymouth charter boats" and "Plymouth deep sea fishing" being forced into nearly every paragraph.</p>
+    <div class="quotes">
+      <blockquote>"Crusader is a purpose-built 38' Evolution, maintained to the highest standards; she is spacious, comfortable, and fast."<cite>Our Story · keep</cite></blockquote>
+      <blockquote>"Over the past three CHART tagging seasons, Crusader has tagged hundreds of tuna, reaching an immense size of 110" and 935lb!"<cite>Big Game Bluefin Tuna · lead with this</cite></blockquote>
+      <blockquote>"Come join the original and best shark swim operator from Plymouth, known for our exceptional Plymouth fishing charters."<cite>Shark Swims · the keyword habit</cite></blockquote>
+      <blockquote>"In 2024, we will utilize a range of techniques, including lures and baits…"<cite>Tuna · dated copy</cite></blockquote>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">06 · Read</span>
+    <h2>What's working, what's holding it back</h2>
+    <div class="wk" style="margin-top:18px">
+      <div><h3>Working</h3><ul>
+        <li>Credentials most charter boats would kill for: since 2007, WISE accredited, NOAA and CHART tagging, a 935 lb bluefin, TripAdvisor top 10% worldwide.</li>
+        <li>Prices are published, which builds trust and cuts tyre-kickers.</li>
+        <li>Genuine photography of real customers and real fish.</li>
+        <li>A clear conservation stance (100% shark catch and release).</li>
+        <li>WhatsApp and an events list with live space counts.</li>
+      </ul></div>
+      <div><h3>Holding it back</h3><ul>
+        <li>One long GoDaddy template page; trips, prices and story all run together.</li>
+        <li>Booking is a mailto link to a personal Gmail plus a PDF of T&amp;Cs to print and sign.</li>
+        <li>Two emails, two phone numbers and a separate safari site split the enquiry path.</li>
+        <li>Keyword-stuffed copy reads robotic and undersells the expertise.</li>
+        <li>Stale details ("In 2024…"), a typo'd link, events showing "All day" for evening trips.</li>
+        <li>The big story, giant tuna on your doorstep, is fourth down the page.</li>
+      </ul></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <span class="lab">07 · Concept direction</span>
+    <h2>Keep, elevate, show off</h2>
+    <div class="dir" style="margin-top:22px">
+      <div><h3>Keep</h3><ul><li>Yeseva One wordmark</li><li>Sand gold #DDCD84</li><li>Their story, prices and photos, word for word where possible</li><li>Phone, WhatsApp, pontoons</li></ul></div>
+      <div><h3>Elevate</h3><ul><li>Hull navy as the anchor colour, gold as the highlight</li><li>Yeseva for headlines, Libre Franklin body, mono for numbers</li><li>Full-bleed photography instead of thumbnails</li><li>Separate pages for trips and tuna; copy rewritten for people, not keywords</li></ul></div>
+      <div><h3>Lead with</h3><ul><li>Big game first: bluefin and sharks are what makes Crusader different from every other Barbican boat</li><li>Conservation as proof of expertise, not a footnote</li></ul></div>
+    </div>
+    <span class="lab" style="margin-top:40px">What the concept shows off</span>
+    <div class="show">
+      <div><b>Trip finder</b><p>Filter by big game, sea fishing or wildlife, with price, duration and group size on every card.</p></div>
+      <div><b>An illustrated chart</b><p>The marks they fish, Eddystone, Rutts, Hands Deeps, plotted from the Barbican. A signature asset no rival has.</p></div>
+      <div><b>Seats on shared trips</b><p>Upcoming sailings with spaces left and a one-tap request, replacing mailto and PDF T&amp;Cs.</p></div>
+      <div><b>The tagging record</b><p>935 lb, 110", NOAA, CHART. Turned into the brand's proof, with a dedicated tuna page.</p></div>
+    </div>
+  </div></section>
+
+  <section style="border-bottom:0"><div class="wrap">
+    <p class="cap">Concept prepared by BrandBildr as a proposal. Not affiliated with or endorsed by Crusader Charters Ltd. Photography and copy © Crusader Charters.</p>
+  </div></section>
+</main>
+
+<script>
+(function(){
+  var views={home:1,tuna:1,trips:1,brandpack:1};
+  var chrome=document.getElementById('chrome'),foot=document.getElementById('foot'),tag=document.querySelector('.bb-tag');
+  function show(v,target){
+    if(!views[v])v='home';
+    document.querySelectorAll('.view').forEach(function(el){el.hidden=el.id!=='v-'+v});
+    var bp=v==='brandpack';chrome.hidden=bp;foot.hidden=bp;tag.hidden=bp;
+    document.querySelectorAll('[data-nav]').forEach(function(a){a.toggleAttribute('aria-current',a.dataset.nav===v);if(a.dataset.nav===v)a.setAttribute('aria-current','page')});
+    if(target){var t=document.getElementById(target);if(t){setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},30);return}}
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-go]');
+    if(a){e.preventDefault();
+      if(a.dataset.trip){var s=document.getElementById('b-trip');[].forEach.call(s.options,function(o,i){if(o.text===a.dataset.trip)s.selectedIndex=i})}
+      if(location.hash!=='#home'&&location.hash!==''){history.pushState(null,'','#home')}
+      show('home',a.dataset.go);}
+  });
+  show(location.hash.slice(1));
+
+  // trip filter
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f;document.querySelectorAll('#trips-grid .trip').forEach(function(t){t.hidden=!(f==='all'||t.dataset.k===f)});
+  })});
+
+  // chart <-> list highlight
+  function hi(m){
+    document.querySelectorAll('#courses path').forEach(function(p){p.style.opacity=!m||p.dataset.m===m?1:.15;p.style.strokeWidth=p.dataset.m===m?3:1.5});
+    document.querySelectorAll('.markrow').forEach(function(r){r.classList.toggle('on',r.dataset.m===m)});
+  }
+  document.querySelectorAll('.markrow,.mk').forEach(function(el){
+    el.addEventListener('mouseenter',function(){hi(el.dataset.m)});
+    el.addEventListener('focus',function(){hi(el.dataset.m)});
+    el.addEventListener('mouseleave',function(){hi(null)});
+  });
+
+  document.getElementById('book').addEventListener('submit',function(e){e.preventDefault();document.getElementById('ok').classList.add('show')});
+  // ---------- BrandBildr front end ----------
+  var cover=document.getElementById('cover');
+  function showCover(){cover.hidden=false;document.body.classList.add('covered');startDots()}
+  function hideCover(){cover.hidden=true;document.body.classList.remove('covered');stopDots()}
+  document.getElementById('enterBtn').addEventListener('click',function(){hideCover();if(location.hash&&location.hash!=='#home'){location.hash='home'}else{show('home')}window.scrollTo(0,0)});
+  document.getElementById('packLink').addEventListener('click',function(){hideCover()});
+  document.getElementById('bbTag').addEventListener('click',showCover);
+  var cv=document.getElementById('dots'),cx=cv.getContext('2d'),dots=[],W,H,mx=-999,my=-999,raf=null,t0=performance.now();
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);var sp=W<600?24:32;dots=[];for(var x=sp/2;x<W;x+=sp)for(var y=sp/2;y<H;y+=sp)dots.push([x,y,Math.random()*6.28])}
+  function draw(t){cx.clearRect(0,0,W,H);var s=(t-t0)/1000;for(var i=0;i<dots.length;i++){var p=dots[i],dx=p[0]-mx,dy=p[1]-my,dist=Math.sqrt(dx*dx+dy*dy),near=Math.max(0,1-dist/170),pulse=reduce?0:(Math.sin(s*0.35+p[2])+1)/2;
+    var a=0.10+pulse*0.08+near*0.75;cx.fillStyle=near>0.02?'rgba(42,71,237,'+a+')':'rgba(239,236,228,'+a+')';cx.beginPath();cx.arc(p[0],p[1],1.1+near*1.6,0,6.283);cx.fill()}
+    if(!reduce)raf=requestAnimationFrame(draw)}
+  function startDots(){size();cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}
+  function stopDots(){cancelAnimationFrame(raf)}
+  addEventListener('resize',function(){if(!cover.hidden){size();if(reduce)draw(performance.now())}});
+  addEventListener('pointermove',function(e){mx=e.clientX;my=e.clientY;if(reduce&&!cover.hidden)draw(performance.now())});
+  if(!location.hash)showCover();
+})();
+</script>
+
+</body>
+</html>
